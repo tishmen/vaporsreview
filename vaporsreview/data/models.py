@@ -15,9 +15,6 @@ class Category(models.Model):
 
 class Manufacturer(models.Model):
 
-    class Meta:
-        unique_together = ('name', 'address')
-
     name = models.CharField(max_length=100, unique=True)
     logo = models.URLField(unique=True, null=True, blank=True)
     address = models.CharField(max_length=100)
@@ -48,7 +45,7 @@ class Shop(models.Model):
 class Item(models.Model):
 
     category = models.ForeignKey('Category')
-    sourceurl = models.URLField()
+    source_url = models.URLField()
     name = models.CharField(max_length=100, unique=True)
     image = models.URLField(unique=True)
     summary = models.TextField()
