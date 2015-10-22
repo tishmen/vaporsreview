@@ -15,6 +15,9 @@ class Category(models.Model):
 
 class Manufacturer(models.Model):
 
+    class Meta:
+        unique_together = ('name', 'address')
+
     name = models.CharField(max_length=100, unique=True)
     logo = models.URLField(unique=True, null=True, blank=True)
     address = models.CharField(max_length=100)
@@ -45,6 +48,7 @@ class Shop(models.Model):
 class Item(models.Model):
 
     category = models.ForeignKey('Category')
+    sourceurl = models.URLField()
     name = models.CharField(max_length=100, unique=True)
     image = models.URLField(unique=True)
     summary = models.TextField()
@@ -54,8 +58,5 @@ class Item(models.Model):
     price = models.FloatField()
     manufacturer = models.ForeignKey('Manufacturer', null=True, blank=True)
     shops = models.ManyToManyField('Shop', blank=True)
-    rating = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)],
-        help_text='Enter integer from 1 to 5'
-    )
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     added = models.DateTimeField(auto_now_add=True)
