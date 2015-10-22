@@ -55,5 +55,5 @@ class Item(models.Model):
     price = models.FloatField()
     manufacturer = models.ForeignKey('Manufacturer', null=True, blank=True)
     shops = models.ManyToManyField('Shop', blank=True)
-    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=5)
     added = models.DateTimeField(auto_now_add=True)
