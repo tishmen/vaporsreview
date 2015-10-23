@@ -1,14 +1,6 @@
 from django.contrib import admin
 
-from data.models import Item, Category, Manufacturer, Shop
-
-
-@admin.register(Item)
-class ItemAdmin(admin.ModelAdmin):
-
-    search_fields = ('name', )
-    list_filter = ('category__name', 'manufacturer__name')
-    list_display = ('name', 'category', 'price', 'rating')
+from data.models import Item, Category, Manufacturer
 
 
 @admin.register(Category)
@@ -20,10 +12,14 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Manufacturer)
 class ManufacturerAdmin(admin.ModelAdmin):
 
-    pass
+    search_fields = ('name', 'description')
+    list_filter = ('rating', )
+    list_display = ('name', 'description')
 
 
-@admin.register(Shop)
-class ShopAdmin(admin.ModelAdmin):
+@admin.register(Item)
+class ItemAdmin(admin.ModelAdmin):
 
-    pass
+    search_fields = ('name', 'summary')
+    list_filter = ('category__name', 'manufacturer__name', 'rating')
+    list_display = ('name', 'summary', 'price', 'currency')
