@@ -1,25 +1,11 @@
 from django.contrib import admin
 
-from data.models import Item, Category, Manufacturer
-
-
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-
-    pass
-
-
-@admin.register(Manufacturer)
-class ManufacturerAdmin(admin.ModelAdmin):
-
-    search_fields = ('name', 'description')
-    list_filter = ('rating', )
-    list_display = ('name', 'description')
+from data.models import Item
 
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
 
-    search_fields = ('name', 'summary')
-    list_filter = ('category__name', 'manufacturer__name', 'rating')
-    list_display = ('name', 'summary', 'price', 'currency')
+    search_fields = ('name', 'summary', 'specifications')
+    list_filter = ('category', 'manufacturer', 'rating')
+    list_display = ('name', 'source_url', 'price', 'currency', 'comment')
